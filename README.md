@@ -1,0 +1,1 @@
+A very simple weather app to get me acquainted with golang
