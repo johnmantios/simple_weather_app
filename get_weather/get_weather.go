@@ -1,6 +1,8 @@
 package get_weather
 
 import (
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"simple_weather_app/utils"
@@ -8,7 +10,7 @@ import (
 
 var key = utilities.ParseYaml()
 
-func GetWeather(city string) string {
+func GetWeather(city string) {
 
 	resp, err := http.Get("http://api.weatherapi.com/v1/current.json?key=" + key + "&q=" + city)
 	if err != nil {
@@ -21,11 +23,15 @@ func GetWeather(city string) string {
 		utilities.Logger("An error ocurred while trying to read the api response body")
 		panic(err)
 	}
-
-	sb := string(body)
-
 	defer resp.Body.Close()
 
-	return sb
+	var data map[string]interface{}
+
+	err = json.Unmarshal([]byte(body), &data)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(data["current"])
 
 }

@@ -1,6 +1,7 @@
 package utilities
 
 import (
+	//"github.com/mitchellh/panicwrap"
 	"github.com/goccy/go-yaml"
 	"io"
 	"io/ioutil"
@@ -44,16 +45,18 @@ func Logger(my_string string) {
 		log.Fatalln(err)
 		panic(err)
 	}
+
 	defer logFile.Close()
 
-	//Setting a multiwriter to write to both a log file and to the console
+	//Setting a multiwriter to write to both a log file and to saved stdout
 	mw := io.MultiWriter(os.Stdout, logFile)
 
-	//Set log output
+	//Set log output. Writes with log.Print will also write to mw
 	log.SetOutput(mw)
 
 	//log date-time, filename and line number
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 
 	log.Println(my_string)
+
 }
