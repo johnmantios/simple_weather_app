@@ -7,5 +7,5 @@ import (
 
 func main() {
 	get_weather.GetWeather("Thessaloniki")
-	//utilities.Logger(message)
+	//utilities.Logger(get_weather.GetWeather("Thessaloniki"))
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"simple_weather_app/api_model"
 	"simple_weather_app/utils"
 )
 
@@ -25,13 +26,14 @@ func GetWeather(city string) {
 	}
 	defer resp.Body.Close()
 
-	var data map[string]interface{}
+	res := &api_model.CurrentJsonResponse{}
 
-	err = json.Unmarshal([]byte(body), &data)
+	err = json.Unmarshal([]byte(body), res)
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(data["current"])
+	fmt.Println("The weather in " + city + " at " + *(res.Current.LastUpdated) + " was: ")
+	fmt.Println(*(res.Current.TempC))
 
 }
