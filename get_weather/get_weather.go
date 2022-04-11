@@ -2,7 +2,7 @@ package get_weather
 
 import (
 	"encoding/json"
-	"fmt"
+	//"fmt"
 	"io/ioutil"
 	"net/http"
 	"simple_weather_app/api_model"
@@ -30,10 +30,10 @@ func GetWeather(city string) {
 
 	err = json.Unmarshal([]byte(body), res)
 	if err != nil {
+		utilities.Logger("An error ocurred while unmarshalling the json api response")
 		panic(err)
 	}
 
-	fmt.Println("The weather in " + city + " at " + *(res.Current.LastUpdated) + " was: ")
-	fmt.Println(*(res.Current.TempC))
+	utilities.Logger("The weather in " + city + " at " + *(res.Current.LastUpdated) + " was: " + utilities.FloatToString(*(res.Current.TempC)) + " degrees Celsius")
 
 }

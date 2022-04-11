@@ -1,13 +1,13 @@
 package utilities
 
 import (
-	//"github.com/mitchellh/panicwrap"
 	"github.com/goccy/go-yaml"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	"strconv"
 )
 
 type Config struct {
@@ -59,4 +59,8 @@ func Logger(my_string string) {
 
 	log.Println(my_string)
 
+}
+
+func FloatToString(input float64) string {
+	return strconv.FormatFloat(input, 'f', 2, 64)
 }
