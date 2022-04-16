@@ -2,7 +2,6 @@ package get_weather
 
 import (
 	"encoding/json"
-	//"fmt"
 	"io/ioutil"
 	"net/http"
 	"simple_weather_app/api_model"
